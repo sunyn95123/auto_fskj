@@ -1,2 +1,2 @@
 # auto_fskj
-automation_app
+ios自动化测掉钱
