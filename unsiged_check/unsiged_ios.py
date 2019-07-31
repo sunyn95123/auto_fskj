@@ -70,7 +70,6 @@ class iosDeployServer():
             "Content-Type": "application/json ;charset=utf-8 "
         }
         # content = f"'{self.fild_ipa}'相关包已掉签，请注意!"
-        # os.remove(file_path)
         stringBody = {
             "msgtype": "text",
             "text": {"content": assertion},
@@ -83,6 +82,8 @@ class iosDeployServer():
         if result.status_code == 200:
             if '设备连接异常,请检查连接设备' in assertion:
                 exit()
+            elif '设备连接异常,请检查设备' in assertion:
+                os.remove(file_path)  # 删除已掉包路径
             else:
                 return result.text
 
