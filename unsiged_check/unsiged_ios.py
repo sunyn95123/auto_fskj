@@ -55,7 +55,7 @@ class iosDeployServer():
             assertion = '设备已连接'
             print(assertion)
         else:
-            assertion = "'设备连接异常,请检查设备'"
+            assertion = '设备连接异常,请检查设备'
             self.getDingMes(assertion)
 
     def testing(self, assertion):
@@ -75,14 +75,14 @@ class iosDeployServer():
             "text": {"content": assertion},
             "at": {
                 "atMobiles": ["17621458930"],
-                "isAtAll": True
+                "isAtAll": False
             }
         }
         result = requests.post(url=URL, data=ujson.dumps(stringBody), headers=HEADERS)
         if result.status_code == 200:
             if '设备连接异常,请检查连接设备' in assertion:
                 exit()
-            elif '设备连接异常,请检查设备' in assertion:
+            elif '相关包已掉签，请注意!' in assertion:
                 os.remove(file_path)  # 删除已掉包路径
             else:
                 return result.text
